@@ -3,124 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sand Yogurt</title>
-  <meta name="description" content="Sand Yogurt: one cup, maximum protein. Great taste, all natural ingredients.">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <title>SAND — 50g Protein Cultured Dairy</title>
+  <meta name="description" content="SAND: Ultra-dense, labneh-style cultured dairy featuring 50g of clean protein per tub. Zero artificial thickeners. Real functional fuel.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --sand: #f4e4c1;
-      --sand-dark: #e2c98f;
+      --sand-dark: #d8bc82;
       --cream: #fffaf0;
       --coral: #ff7f6b;
       --ocean: #2bb3c0;
       --ink: #3b2f2a;
+      --card-bg: #ffffff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Nunito', sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
     h1, h2, h3 { font-family: 'Fredoka', sans-serif; }
-    a { color: inherit; }
+    a { color: inherit; text-decoration: none; }
 
     nav { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;
           padding: 16px 24px; background: rgba(255,250,240,.92); backdrop-filter: blur(6px); border-bottom: 2px solid var(--sand); }
-    .logo { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.5rem; text-decoration: none; }
+    .logo { font-family: 'Fredoka', sans-serif; font-weight: 700; font-size: 1.6rem; letter-spacing: 0.05em; }
     .logo span { color: var(--coral); }
-    nav ul { list-style: none; display: flex; gap: 20px; }
-    nav ul a { text-decoration: none; font-weight: 600; }
+    nav ul { list-style: none; display: flex; gap: 24px; }
+    nav ul a { font-weight: 600; }
     nav ul a:hover { color: var(--coral); }
 
-    .hero { text-align: center; padding: 100px 24px 140px; position: relative; overflow: hidden;
-            background: linear-gradient(180deg, #bfeef2 0%, var(--cream) 55%, var(--sand) 100%); }
-    .hero h1 { font-size: clamp(2.8rem, 8vw, 5rem); line-height: 1.1; }
+    .hero { text-align: center; padding: 90px 24px 120px; position: relative; overflow: hidden;
+            background: linear-gradient(180deg, #f7ebd7 0%, var(--cream) 60%, var(--sand) 100%); }
+    .badge { display: inline-block; background: var(--sand-dark); color: var(--ink); font-weight: 700; font-size: 0.85rem; 
+             text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 999px; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(2.8rem, 7vw, 4.8rem); line-height: 1.1; margin-bottom: 20px; }
     .hero h1 span { color: var(--coral); }
-    .hero p { font-size: 1.25rem; max-width: 560px; margin: 20px auto 32px; }
-    .btn { display: inline-block; background: var(--coral); color: #fff; padding: 14px 32px; border-radius: 999px;
-           font-weight: 700; text-decoration: none; transition: transform .15s; }
-    .btn:hover { transform: translateY(-3px); }
-    .cup { font-size: 5rem; display: block; margin-bottom: 12px; animation: bob 3s ease-in-out infinite; }
-    @keyframes bob { 50% { transform: translateY(-12px); } }
+    .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 36px; color: #5a4a42; }
+    
+    .waitlist-form { display: flex; justify-content: center; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; }
+    .waitlist-form input { flex: 1; min-width: 260px; padding: 14px 20px; border-radius: 999px; border: 2px solid var(--sand-dark); 
+                           background: #fff; font-family: inherit; font-size: 1rem; color: var(--ink); outline: none; }
+    .waitlist-form input:focus { border-color: var(--coral); }
+    .btn { display: inline-block; background: var(--coral); color: #fff; padding: 14px 28px; border-radius: 999px;
+           font-weight: 700; border: none; cursor: pointer; transition: transform .15s, background .15s; font-family: inherit; font-size: 1rem; }
+    .btn:hover { transform: translateY(-2px); background: #e06c58; }
 
     section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
     section h2 { font-size: 2.4rem; text-align: center; margin-bottom: 12px; }
-    .sub { text-align: center; max-width: 600px; margin: 0 auto 48px; }
+    .sub { text-align: center; max-width: 650px; margin: 0 auto 48px; color: #5a4a42; font-size: 1.1rem; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px; }
-    .card { background: #fff; border-radius: 20px; padding: 28px; border: 2px solid var(--sand); text-align: center;
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .card { background: var(--card-bg); border-radius: 20px; padding: 32px 28px; border: 2px solid var(--sand); text-align: left;
             transition: transform .2s, box-shadow .2s; }
-    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px rgba(0,0,0,.08); }
-    .card .emoji { font-size: 3rem; }
-    .card h3 { margin: 10px 0 6px; font-size: 1.3rem; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,.06); }
+    .card .stat { font-family: 'Fredoka', sans-serif; font-size: 2.2rem; color: var(--coral); margin-bottom: 8px; }
+    .card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+    .card p { color: #5a4a42; font-size: 0.98rem; }
 
-    .about { background: var(--sand); max-width: none; }
-    .about-inner { max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; }
+    .matrix-section { background: #fff; border-radius: 28px; border: 2px solid var(--sand); padding: 50px 32px; margin: 40px auto; }
+    .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center; }
+    .matrix-item h4 { font-family: 'Fredoka', sans-serif; font-size: 1.2rem; margin-bottom: 6px; color: var(--ocean); }
+    .matrix-item p { font-size: 0.95rem; color: #5a4a42; }
 
-    .visit-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-    .visit-box div { background: #fff; border-radius: 20px; padding: 28px; border: 2px solid var(--sand); }
-    .visit-box h3 { color: var(--ocean); margin-bottom: 8px; }
+    .about { background: var(--sand); max-width: none; padding: 90px 24px; }
+    .about-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .about-inner h2 { margin-bottom: 20px; }
+    .about-inner p { font-size: 1.15rem; line-height: 1.8; color: #4a3d36; }
 
-    footer { text-align: center; padding: 32px 24px; background: var(--ink); color: var(--sand); }
+    footer { text-align: center; padding: 40px 24px; background: var(--ink); color: var(--sand); font-size: 0.95rem; }
+    footer a { color: var(--coral); }
 
-    @media (max-width: 600px) { nav ul { gap: 12px; font-size: .9rem; } }
+    @media (max-width: 600px) { 
+      nav ul { display: none; } 
+      .waitlist-form { flex-direction: column; }
+      .waitlist-form input, .waitlist-form .btn { width: 100%; }
+    }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="#" class="logo">Sand <span>Yogurt</span></a>
+    <a href="#" class="logo">SAND<span>.</span></a>
     <ul>
-      <li><a href="#flavors">Flavors</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#visit">Visit</a></li>
+      <li><a href="#product">The Product</a></li>
+      <li><a href="#matrix">Formulation</a></li>
+      <li><a href="#about">Philosophy</a></li>
     </ul>
   </nav>
 
   <header class="hero">
-    <span class="cup">🍦</span>
-    <h1>One cup.<br><span>Maximum protein.</span></h1>
-    <p>Great taste. All natural ingredients. Everything you want in a yogurt, nothing you don't.</p>
-    <a href="#why" class="btn">Why Sand Yogurt</a>
+    <span class="badge">Micro-Batch Functional Dairy</span>
+    <h1>One tub.<br><span>50g Clean Protein.</span></h1>
+    <p>An ultra-thick, labneh-style Greek yogurt meal replacement built for macro-density. Zero artificial gums, zero compromises.</p>
+    
+    <form class="waitlist-form" action="mailto:hello@sandyogurt.com" method="GET">
+      <input type="email" placeholder="Enter your email for drop access..." required>
+      <button type="submit" class="btn">Join Waitlist</button>
+    </form>
   </header>
 
-  <section id="why">
-    <h2>Why Sand Yogurt</h2>
-    <p class="sub">Built to fuel you, made to taste amazing.</p>
+  <section id="product">
+    <h2>Engineered for Performance</h2>
+    <p class="sub">Designed to replace chalky protein shakes and low-calorie diet traps with dense, real food.</p>
     <div class="grid">
-      <div class="card"><div class="emoji">💪</div><h3>Maximum Protein</h3><p>Packed with protein in every single cup to keep you full and fueled.</p></div>
-      <div class="card"><div class="emoji">😋</div><h3>Great Taste</h3><p>Rich, creamy, and delicious. No compromise on flavor.</p></div>
-      <div class="card"><div class="emoji">🌿</div><h3>All Natural</h3><p>Simple, all-natural ingredients you can feel good about.</p></div>
+      <div class="card">
+        <div class="stat">50g</div>
+        <h3>High Protein Payload</h3>
+        <p>A substantial meal replacement engineered to optimize your protein-to-calorie ratio without artificial supplements.</p>
+      </div>
+      <div class="card">
+        <div class="stat">Labneh</div>
+        <h3>Spoon-Standing Texture</h3>
+        <p>Thick, velvety mouthfeel achieved through precision straining and natural dairy architecture, not chemical stabilizers.</p>
+      </div>
+      <div class="card">
+        <div class="stat">100%</div>
+        <h3>Clean Label Matrix</h3>
+        <p>Crafted exclusively from cultured whole dairy, high-grade Whey Protein Isolate (WPI), and chicory root inulin.</p>
+      </div>
     </div>
   </section>
 
-  <section id="flavors">
-    <h2>Our Flavors</h2>
-    <p class="sub">Made fresh every day. Rotating specials every week.</p>
-    <div class="grid">
-      <div class="card"><div class="emoji">🥥</div><h3>Coconut Cove</h3><p>Toasted coconut with a hint of vanilla.</p></div>
-      <div class="card"><div class="emoji">🍓</div><h3>Strawberry Shore</h3><p>Sweet strawberries swirled into tart yogurt.</p></div>
-      <div class="card"><div class="emoji">🥭</div><h3>Mango Tide</h3><p>Bright, juicy mango. Pure summer.</p></div>
-      <div class="card"><div class="emoji">🍪</div><h3>Sandcastle Cookie</h3><p>Brown-sugar cookie crumble in every bite.</p></div>
+  <section id="matrix">
+    <div class="matrix-section">
+      <h2 style="margin-bottom: 12px;">The SAND Matrix</h2>
+      <p class="sub" style="margin-bottom: 40px;">How we achieve maximum density and clean nutrition.</p>
+      <div class="matrix-grid">
+        <div class="matrix-item">
+          <h4>Whey Protein Isolate</h4>
+          <p>Pre-fermentation high-shear blending ensures complete protein integration without grit or separation.</p>
+        </div>
+        <div class="matrix-item">
+          <h4>Chicory Root Inulin</h4>
+          <p>Provides natural prebiotic fiber for digestive health, enhanced satiety, and mouthfeel structure.</p>
+        </div>
+        <div class="matrix-item">
+          <h4>Active Cultures</h4>
+          <p>Traditional live probiotic cultures fermented under strict temperature control for optimal tartness.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="about" class="about">
-    <div class="about-inner">
-      <h2>About Us</h2>
-      <p>Sand Yogurt started with a simple idea: a yogurt that's high in protein, made from all natural ingredients, and still tastes great. One cup is all it takes.</p>
-    </div>
-  </section>
-
-  <section id="visit">
-    <h2>Come Visit</h2>
-    <p class="sub">We'd love to see you.</p>
-    <div class="visit-box">
-      <div><h3>📍 Location</h3><p>123 Boardwalk Ave<br>Your City, ST 00000</p></div>
-      <div><h3>🕒 Hours</h3><p>Mon–Thu: 12pm – 9pm<br>Fri–Sun: 11am – 10pm</p></div>
-      <div><h3>💬 Contact</h3><p><a href="mailto:hello@sandyogurt.com">hello@sandyogurt.com</a><br>(555) 123-4567</p></div>
-    </div>
+    Real food shouldn't require a compromise between macros and taste. We built SAND for high-performance individuals who want a clean, spoonable meal that actually satisfies. Micro-batch brewed, cold-chain fresh.
   </section>
 
   <footer>
-    <p>&copy; 2026 Sand Yogurt · sandyogurt.com</p>
+    <p>&copy; 2026 SAND Dairy Co. · <a href="mailto:hello@sandyogurt.com">hello@sandyogurt.com</a></p>
   </footer>
 
 </body>
