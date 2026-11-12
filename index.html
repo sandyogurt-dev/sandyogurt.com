@@ -32,19 +32,21 @@
 
     .hero { text-align: center; padding: 90px 24px 120px; position: relative; overflow: hidden;
             background: linear-gradient(180deg, #f7ebd7 0%, var(--cream) 60%, var(--sand) 100%); }
-    .badge { display: inline-block; background: var(--sand-dark); color: var(--ink); font-weight: 700; font-size: 0.85rem; 
+    .badge { display: inline-block; background: var(--sand-dark); color: var(--ink); font-weight: 700; font-size: 0.85rem;
              text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 999px; margin-bottom: 20px; }
     .hero h1 { font-size: clamp(2.8rem, 7vw, 4.8rem); line-height: 1.1; margin-bottom: 20px; }
     .hero h1 span { color: var(--coral); }
     .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 36px; color: #5a4a42; }
-    
+
     .waitlist-form { display: flex; justify-content: center; gap: 10px; max-width: 480px; margin: 0 auto; flex-wrap: wrap; }
-    .waitlist-form input { flex: 1; min-width: 260px; padding: 14px 20px; border-radius: 999px; border: 2px solid var(--sand-dark); 
+    .waitlist-form input { flex: 1; min-width: 260px; padding: 14px 20px; border-radius: 999px; border: 2px solid var(--sand-dark);
                            background: #fff; font-family: inherit; font-size: 1rem; color: var(--ink); outline: none; }
     .waitlist-form input:focus { border-color: var(--coral); }
     .btn { display: inline-block; background: var(--coral); color: #fff; padding: 14px 28px; border-radius: 999px;
            font-weight: 700; border: none; cursor: pointer; transition: transform .15s, background .15s; font-family: inherit; font-size: 1rem; }
     .btn:hover { transform: translateY(-2px); background: #e06c58; }
+    .btn:disabled { opacity: .7; cursor: default; transform: none; }
+    .waitlist-msg { margin-top: 16px; font-weight: 700; min-height: 1.6em; }
 
     section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
     section h2 { font-size: 2.4rem; text-align: center; margin-bottom: 12px; }
@@ -71,8 +73,8 @@
     footer { text-align: center; padding: 40px 24px; background: var(--ink); color: var(--sand); font-size: 0.95rem; }
     footer a { color: var(--coral); }
 
-    @media (max-width: 600px) { 
-      nav ul { display: none; } 
+    @media (max-width: 600px) {
+      nav ul { display: none; }
       .waitlist-form { flex-direction: column; }
       .waitlist-form input, .waitlist-form .btn { width: 100%; }
     }
@@ -93,11 +95,12 @@
     <span class="badge">Micro-Batch Functional Dairy</span>
     <h1>One cup.<br><span>50g Clean Protein.</span></h1>
     <p>An ultra-thick, labneh-style Greek yogurt meal replacement built for macro-density. Zero artificial gums, zero compromises.</p>
-    
-    <form class="waitlist-form" action="mailto:hello@sandyogurt.com" method="GET">
-      <input type="email" placeholder="Enter your email for drop access..." required>
+
+    <form class="waitlist-form" id="waitlist-form">
+      <input type="email" name="email" placeholder="Enter your email for drop access..." required>
       <button type="submit" class="btn">Join Waitlist</button>
     </form>
+    <p class="waitlist-msg" id="waitlist-msg"></p>
   </header>
 
   <section id="product">
@@ -144,12 +147,41 @@
   </section>
 
   <section id="about" class="about">
-    Real food shouldn't require a compromise between macros and taste. We built SAND for high-performance individuals who want a clean, spoonable meal that actually satisfies. Micro-batch brewed, cold-chain fresh.
+    <div class="about-inner">
+      <h2>Our Philosophy</h2>
+      <p>Real food shouldn't require a compromise between macros and taste. We built SAND for high-performance individuals who want a clean, spoonable meal that actually satisfies. Micro-batch brewed, cold-chain fresh.</p>
+    </div>
   </section>
 
   <footer>
     <p>&copy; 2026 SAND Dairy Co. · <a href="mailto:info@sandyogurt.com">info@sandyogurt.com</a></p>
   </footer>
+
+  <script>
+    const WAITLIST_URL = 'https://script.google.com/macros/s/AKfycbwycrnbkp2vKI0lSaBB4JrDwXHRd-horyse9rwk2OA-ZJDXj6PF8vI2X3pAU0BEnGPWbA/exec';
+
+    const form = document.getElementById('waitlist-form');
+    const msg = document.getElementById('waitlist-msg');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+      try {
+        await fetch(WAITLIST_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new URLSearchParams(new FormData(form))
+        });
+        msg.textContent = "You're on the list. We'll email you before the drop.";
+        form.reset();
+      } catch (err) {
+        msg.textContent = 'Something went wrong. Please try again.';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Join Waitlist';
+    });
+  </script>
 
 </body>
 </html>
